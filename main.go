@@ -21,6 +21,17 @@ var (
 	numStrStyle = lipgloss.NewStyle().Bold(true).Render
 )
 
+var tableBorder = lipgloss.Border{
+	Top:         "─",
+	Bottom:      "─",
+	Left:        "│",
+	Right:       "│",
+	TopLeft:     "│",
+	TopRight:    "│",
+	BottomLeft:  "│",
+	BottomRight: "│",
+}
+
 type currentView uint
 
 const (
@@ -78,6 +89,10 @@ func (m model) footerView() string {
 func (m model) renderContent() string {
 	var s string
 
+	if m.parsedHtml.Verbalisation != "" {
+		s += lipgloss.NewStyle().Foreground(lipgloss.Color("11")).Render(m.parsedHtml.Verbalisation) + "\n\n"
+	}
+
 	for _, v := range m.parsedHtml.Entries {
 		re := regexp.MustCompile("\\d+")
 
@@ -103,6 +118,71 @@ func (m model) renderContent() string {
 
 		s += style.Render(strings.TrimSpace(fmt.Sprintf("%s %s", numStr, v.Content))) + "\n\n"
 	}
+
+	// renderējam tabulu
+	if m.parsedHtml.ConjTable.ColumnCount > 0 {
+		var rowStrings []string
+
+		// renderējam rindas
+		for rowIdx := range m.parsedHtml.ConjTable.RowItems {
+			var colStrings []string
+
+			for colIdx := range m.parsedHtml.ConjTable.RowItems[rowIdx] {
+				rowItem := m.parsedHtml.ConjTable.RowItems[rowIdx][colIdx]
+
+				if rowItem.ColSpan == 0 {
+					continue
+				}
+
+				width := rowItem.ColSpan - 1
+
+				for i := 0; i < rowItem.ColSpan; i++ {
+					width += m.parsedHtml.ConjTable.ColItems[colIdx+i].Width + 1
+				}
+
+				alignment := lipgloss.Left
+				if rowItem.ColSpan > 1 {
+					alignment = lipgloss.Center
+				}
+
+				textColor := lipgloss.Color("15")
+
+				if rowItem.IsHeading {
+					textColor = lipgloss.Color("12")
+				}
+
+				style := lipgloss.NewStyle().
+					BorderStyle(tableBorder).
+					BorderForeground(lipgloss.Color("8")).
+					BorderRight(true).
+					BorderLeft(colIdx == 0).
+					BorderBottom(rowItem.IsThead).
+					Foreground(textColor).
+					Align(alignment).
+					Width(width)
+
+				colStrings = append(colStrings, style.Render(rowItem.Text))
+			}
+
+			rowStrings = append(rowStrings, lipgloss.JoinHorizontal(0, colStrings...))
+		}
+
+		tableStr := lipgloss.JoinVertical(0, rowStrings...)
+
+		s += lipgloss.NewStyle().Underline(true).Render("Locīšana:") + "\n\n"
+
+		s += lipgloss.NewStyle().
+			// BorderStyle(lipgloss.NormalBorder()).
+			// BorderForeground(lipgloss.Color("241")).
+			// BorderTop(true).
+			// BorderBottom(true).
+			Render(tableStr) + "\n\n"
+
+	}
+
+	// if m.parsedHtml.TestText != "" {
+	// 	s += lipgloss.NewStyle().Width(m.width).Render(m.parsedHtml.TestText) + "\n"
+	// }
 
 	return s
 }
@@ -209,7 +289,6 @@ func (m model) View() string {
 
 	}
 
-	// just so the compiler isn't mad
 	return ""
 }
 
