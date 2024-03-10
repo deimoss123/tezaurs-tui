@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/url"
 	"os"
@@ -61,6 +62,8 @@ type model struct {
 	httpErr    error
 
 	exitErr error
+
+	testText string
 }
 
 func initialModel() model {
@@ -184,6 +187,8 @@ func (m model) renderContent() string {
 	// 	s += lipgloss.NewStyle().Width(m.width).Render(m.parsedHtml.TestText) + "\n"
 	// }
 
+	// s += m.testText + "\n"
+
 	return s
 }
 
@@ -286,13 +291,48 @@ func (m model) View() string {
 
 	case VIEW_MAIN:
 		return fmt.Sprintf("%s\n%s\n%s", m.headerView(), m.viewport.View(), m.footerView())
-
 	}
 
 	return ""
 }
 
 func main() {
+	textOnly := flag.Bool("t", false, "Printēt tikai tekstu, bez saskarnes")
+	help := flag.Bool("h", false, "Palīdzība")
+
+	flag.Parse()
+
+	if *help {
+		flag.PrintDefaults()
+		os.Exit(0)
+	}
+
+	if *textOnly {
+		if len(flag.Args()) == 0 {
+			fmt.Print("Kļūda: izmantojot -t karogu ir jānorāda vārds kuru meklēt\n\n")
+			fmt.Print("Piemērs:\n\n")
+			fmt.Print("tezaurs -t biezpiens\n")
+			os.Exit(0)
+		}
+
+		word := flag.Args()[0]
+
+		res, err := util.FetchTezaurs("https://tezaurs.lv/" + url.PathEscape(word))
+
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		parsed, err := parser.ParseHtml(res.Body)
+
+		for _, v := range parsed.Entries {
+			fmt.Println(v.NumStr, v.Content)
+		}
+
+		os.Exit(0)
+	}
+
 	m := initialModel()
 
 	p := tea.NewProgram(m, tea.WithMouseCellMotion(), tea.WithAltScreen())
