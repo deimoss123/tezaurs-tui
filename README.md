@@ -2,7 +2,7 @@
 
 ![piemērs](/assets/piemers.gif)
 
-## Kā ieinstalēt
+# Kā ieinstalēt
 
 Pagaidām strādā tikai uz Linux un visticamāk arī macOS (neesmu testējis).
 Ja vēlies izmantot uz Windows, tad nāksies instalēt WSL2.
@@ -24,33 +24,33 @@ cd tezaurs-tui
 
 Tēzauru var palaist ar komandu `tezaurs` 
 
-Ja komanda netiek atrasta, tad `~/.local/bin` nav pievienots PATH, 
-to var izdarīt pievienojot sekojošo rindiņu savas čaulas konfigurācijas failam (`~/.bashrc`, `~/.zshrc`).
+Ja komanda netiek atrasta, tad `~/.local/bin` nav pievienots PATH 
+To var izdarīt pievienojot sekojošo rindiņu savas čaulas konfigurācijas failam (`~/.bashrc`, `~/.zshrc`).
 
 ```sh
 export PATH="$PATH:$HOME/.local/bin"
 ```
 
-## Kā lietot
+# Kā lietot
 
 Palaižot `tezaurs` bez papildus argumentiem tiks atvērts vārdu meklētājs (`fzf`)
 
-### Taustiņi
+## Taustiņi
 
 Meklētājā:
-- **↑** / **↓** : Navigēt starp vārdiem sarakstā
-- **Enter** : Izvēlēties vārdu
-- **Esc** : Iziet
+- **↑** / **↓** - Naviģēt starp vārdiem sarakstā
+- **Enter** - Izvēlēties vārdu
+- **Esc** - Iziet
 
 Saskarnē:
-- **↑** / **k**: Patīt uz augšu pa vienu rindu
-- **↓** / **j**: Patīt uz leju pa vienu rindu
-- **u** : Patīt uz augšu pa pusekrānu
-- **d** : Patīt uz leju pa pusekrānu
-- **m** : Meklēt jaunu vārdu
-- **Esc** / **q** / **ctrl+c** : Iziet
+- **↑** / **k** - Patīt uz augšu par vienu rindu
+- **↓** / **j** - Patīt uz leju par vienu rindu
+- **u** - Patīt uz augšu par pusekrānu
+- **d** - Patīt uz leju par pusekrānu
+- **m** - Meklēt jaunu vārdu
+- **Esc** / **q** / **ctrl+c** - Iziet
 
-### Papildus komandas argumenti
+## Papildus komandas argumenti
 
 ### `tezaurs -h`
 
