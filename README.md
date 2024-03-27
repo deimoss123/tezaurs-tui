@@ -1,14 +1,14 @@
 # Tēzaurs terminālī
 
 Nav pārlūka un vēlies izmantot Tēzauru? Tēzaurs terminālī. <br>
-Nav logošanas sistēma? Tēzaurs terminālī. <br>
+Nav logošanas sistēmas? Tēzaurs terminālī. <br>
 Nav interneta savienojuma? Tēzaurs te... ne gluži. <br>
 
 Pagaidām šī programma izmanto [tezaurs.lv](https://tezaurs.lv/), lai iegūtu (noskrāpētu) datus, jo Tēzaura atvērtajiem datiem trūkst informācija par locījumiem un citām lietam.
 
 ![piemērs](/assets/piemers.gif)
 
-Šis projekts vēl tikai top un tam trūkst daudzas lietas, kas ir īstajā Tēzaurā.
+Šis projekts vēl tikai top un tam trūkst daudz lietu, kas ir īstajā Tēzaurā.
 
 Mērķis ir izstrādāt Tēzauru terminālī ar pilnu tezaurs.lv funkcionalitāti, kā arī iespēju izmantot bez interneta savienojuma. 
 
@@ -70,7 +70,7 @@ Izvada lietošanas pamācību.
 
 ### `tezaurs -t <vārds>`
 
-Izvadīs terminālī tikai tekstu, bez saskarnes.
+Izvada terminālī tikai tekstu, bez saskarnes.
 Tiks izvadīts tikai vārda skaidrojums, bez locījumiem.
 
 ![](/assets/piemers2.png)
