@@ -326,8 +326,17 @@ func main() {
 
 		parsed, err := parser.ParseHtml(res.Body)
 
+		if len(parsed.Entries) == 0 {
+			fmt.Printf("Vārds \"%s\" netika atrasts\n", word)
+			os.Exit(0)
+		}
+
 		for _, v := range parsed.Entries {
-			fmt.Println(v.NumStr, v.Content)
+			if v.NumStr == "" {
+				fmt.Println(v.Content)
+			} else {
+				fmt.Printf("%s %s\n", v.NumStr, v.Content)
+			}
 		}
 
 		os.Exit(0)

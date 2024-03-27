@@ -48,6 +48,7 @@ type FzfFinished struct {
 }
 
 const fzfOpts = "--height=100% --prompt='[T]: '"
+const wordlistPath = "$HOME/.local/share/tezaurs/wordlist.txt"
 
 func OpenFzfCmd() tea.Cmd {
 	// temp files aren't ideal, but i don't see a better solution
@@ -61,7 +62,7 @@ func OpenFzfCmd() tea.Cmd {
 
 	c := exec.Command(
 		"bash", "-c",
-		fmt.Sprintf("fzf %s < wordlist.txt > %s", fzfOpts, file.Name()),
+		fmt.Sprintf("fzf %s < %s > %s", fzfOpts, wordlistPath, file.Name()),
 	)
 
 	return tea.ExecProcess(c, func(err error) tea.Msg {
