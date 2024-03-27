@@ -12,7 +12,7 @@ Pagaidām šī programma izmanto [tezaurs.lv](https://tezaurs.lv/), lai iegūtu 
 
 Mērķis ir izstrādāt Tēzauru terminālī ar pilnu tezaurs.lv funkcionalitāti, kā arī iespēju izmantot bez interneta savienojuma. 
 
-Šis **NAV* oficiāls Tēzaura projekts, es nestrādāju LUMII.
+Šis **NAV** oficiāls Tēzaura projekts, es nestrādāju LUMII.
 
 # Kā ieinstalēt
 
