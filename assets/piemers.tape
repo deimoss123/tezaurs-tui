@@ -5,7 +5,7 @@ Set FontSize 16
 Set TypingSpeed 300ms
 Set Padding 20
 Set Width 800
-Set Height 600
+Set Height 500
 
 Sleep 1s
 Type "tezaurs"
@@ -16,7 +16,7 @@ Type "braukt"
 Sleep 1.5s
 Enter
 Sleep 2s
-Type "jjjjjjjjjjjkkkkkkkkk"
+Type "jjjjjjjjjjjjjjjjj"
 Sleep 3s
 Type"m"
 Sleep 1.5s
@@ -36,5 +36,5 @@ Type "piens"
 Sleep 1.5s
 Enter
 Sleep 2s
-Type "jjjjjjjjjjj"
+Type "jjjjjjjjjjjjjjjjj"
 Sleep 2s
